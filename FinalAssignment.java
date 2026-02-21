@@ -20,7 +20,19 @@ public class FinalAssignment
         return product; 
     }
 
-    public static int RepeatedSubtraction(int a, int b)
+    public static class QuotientRemainder
+    {
+        final int quotient;
+        final int remainder;
+
+        public QuotientRemainder(int quotient, int remainder)
+        {
+            this.quotient = quotient;
+            this.remainder = remainder;
+        }
+    }
+
+    public static QuotientRemainder RepeatedSubtraction(int a, int b)
     {
         int quotient = 0; // Initialize quotient to 0
         while (a >= b)
@@ -29,26 +41,15 @@ public class FinalAssignment
             quotient++; // Increment the quotient for each subtraction
             // The quotient represents how many times 'b' can be subtracted from 'a' before 'a' becomes less than 'b'
         }
-        return quotient;
-    }
-
-    public static int CalculateRemainder(int a, int b)
-    {
-        while (a >= b)
-        {
-            a -= b; // Subtract 'b' from 'a' until 'a' is less than 'b'
-        }
-        
-        return a; // The remaining value of 'a' is the remainder
+        return new QuotientRemainder(quotient, a);
     }
 
     public static void main(String[] args)
     {
         int product = RepeatedAddition(num1, num2);
         System.out.println("The product of " + num1 + " and " + num2 + " is: " + product);
-        int quotient = RepeatedSubtraction(num1, num2);
-        System.out.println("The quotient of " + num1 + " and " + num2 + " is: " + quotient);
-        int remainder = CalculateRemainder(num1, num2);
-        System.out.println("The remainder of " + num1 + " and " + num2 + " is: " + remainder);
+        QuotientRemainder qr = RepeatedSubtraction(num1, num2);
+        System.out.println("The integer quotient of " + num1 + " and " + num2 + " is: " + qr.quotient);
+        System.out.println("The integer remainder of " + num1 + " and " + num2 + " is: " + qr.remainder);
     }
 }
